@@ -1,0 +1,55 @@
+Question:  
+---------------------------------------------------------------------------------------------------------------
+Read a name and print a welcome message.
+
+Example.
+
+Output: What is your name?
+
+Input: Charles
+
+Output: Hello Charles! Welcome to Assembly Language Programming!
+------------------------------------------------------------------------------------------------------------------
+Answer:
+------------------------------------------------------------------------------------------------------------------
+.data
+prompt:   .asciiz "What is your name?\n"
+hello:    .asciiz "Hello! "
+welcome:  .asciiz "Welcome to Assembly Language Programming!\n"
+name:     .space  50        # space to store the name
+
+.text
+.globl main
+
+main:
+    # Print prompt
+    li $v0, 4
+    la $a0, prompt
+    syscall
+
+    # Read name
+    li $v0, 8
+    la $a0, name
+    li $a1, 50
+    syscall
+
+    # Print "Hello "
+    li $v0, 4
+    la $a0, hello
+    syscall
+
+    # Print name
+    li $v0, 4
+    la $a0, name
+   	syscall
+
+    # Print welcome message
+    li $v0, 4
+    la $a0, welcome
+    syscall
+
+    # Exit program
+    li $v0, 10
+    syscall
+-----------------------------------------------------------------------------------------------------
+
