@@ -1,0 +1,61 @@
+Question: 
+------------------------------------------------------------------------
+Read three numbers and print the total
+-----------------------------------------------------------------------
+.data
+prompt1: .asciiz "Enter first number: "
+prompt2: .asciiz "Enter second number: "
+prompt3: .asciiz "Enter third number: "
+result:  .asciiz "Total = "
+
+.text
+.globl main
+
+main:
+    # Read first number
+    li $v0, 4
+    la $a0, prompt1
+    syscall
+
+    li $v0, 5          # read integer
+    syscall
+    move $t0, $v0      # store first number
+
+    # Read second number
+    li $v0, 4
+    la $a0, prompt2
+    syscall
+
+    li $v0, 5
+    syscall
+    move $t1, $v0      # store second number
+
+    # Read third number
+    li $v0, 4
+    la $a0, prompt3
+    syscall
+
+    li $v0, 5
+    syscall
+    move $t2, $v0      # store third number
+
+    # Calculate total
+    add $t3, $t0, $t1
+    add $t3, $t3, $t2
+
+    # Print result message
+    li $v0, 4
+    la $a0, result
+    syscall
+
+    # Print total
+    li $v0, 1          # print integer
+    move $a0, $t3
+    syscall
+
+    # Exit program
+    li $v0, 10
+    syscall
+------------------------------------------------------------------------------
+Output
+------------------------------------------------------------------------------
