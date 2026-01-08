@@ -1,0 +1,23 @@
+.data
+array: .space 20       # space for 5 integers (5 × 4 bytes)
+
+.text
+.globl main
+
+main:
+    la $t0, array      # $t0 points to the start of the array
+    li $t1, 5          # counter = 5
+
+read_loop:
+    li $v0, 5          # syscall 5: read integer
+    syscall
+
+    sw $v0, 0($t0)     # store input value into array
+    addi $t0, $t0, 4   # move to next array element
+    addi $t1, $t1, -1  # decrement counter
+
+    bne $t1, $zero, read_loop
+
+    # Exit program
+    li $v0, 10
+    syscall
