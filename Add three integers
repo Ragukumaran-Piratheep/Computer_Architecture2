@@ -1,0 +1,50 @@
+Question
+------------------------------------------------------------------------------------------------------
+Create three integer variables num1, num2 and num3.
+
+Read three numbers and store them in these variables.
+
+Find the sum of the values in these three variables and print it.
+-------------------------------------------------------------------------------------------------------
+
+.data
+num1: .word 0
+num2: .word 0
+num3: .word 0
+
+.text
+.globl main
+
+main:
+    # Read first integer
+    li $v0, 5          # syscall 5: read integer
+    syscall
+    sw $v0, num1
+
+    # Read second integer
+    li $v0, 5
+    syscall
+    sw $v0, num2
+
+    # Read third integer
+    li $v0, 5
+    syscall
+    sw $v0, num3
+
+    # Load numbers into registers
+    lw $t0, num1
+    lw $t1, num2
+    lw $t2, num3
+
+    # Compute sum
+    add $t3, $t0, $t1
+    add $t3, $t3, $t2
+
+    # Print sum
+    move $a0, $t3
+    li $v0, 1          # syscall 1: print integer
+    syscall
+
+    # Exit program
+    li $v0, 10         # syscall 10: exit
+    syscall
